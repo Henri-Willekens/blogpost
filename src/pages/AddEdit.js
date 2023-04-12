@@ -63,7 +63,7 @@ const AddEdit = () => {
         setState({ ...state, [e.target.name]: e.target.value })
     }
     return (
-        <div style={{ marginTop: "100px" }} class="form-container">
+        <div style={{ marginTop: "100px" }} className="form-container">
             <form style={{ margin: "auto", padding: "15px", maxWidth: "400px", alignContent: "center" }} onSubmit={handleSubmit}>
                 <label htmlFor="title"> Title</label>
                 <input type="text" id="title" name="title" placeholder='Enter blog title...' onChange={handleInputChange} defaultValue={title} />

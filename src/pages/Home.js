@@ -11,9 +11,11 @@ const Home = () => {
     }, [])
 
     const getBlogs = async () => {
-        const response = await axios.get("http://localhost:5000/blogs");
-        if (response.status === 200) {
+        try {
+            const response = await axios.get("http://localhost:5000/blogs/");
             setData(response.data);
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -39,7 +41,7 @@ const Home = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data && data.map((item, index) => {
+                    {data.length > 0 ? data.map((item, index) => {
                         return (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
@@ -49,14 +51,14 @@ const Home = () => {
                                     <Link to={`/update/${item.id}`}>
                                         <button>Edit</button>
                                     </Link>
-                                    <button onClick={() => onDeleteBlog(item.id)}>Delete</button>
+                                    <button onClick={() => onDeleteBlog(item.id)} className="delete-btn">Delete</button>
                                     <Link to={`/view/${item.id}`}>
                                         <button>View</button>
                                     </Link>
                                 </td>
                             </tr>
                         )
-                    })}
+                    }) : <tr><td>Loading...</td></tr>}
                 </tbody>
             </table>
         </div>
